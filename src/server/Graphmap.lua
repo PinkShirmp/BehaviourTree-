@@ -1,4 +1,6 @@
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local map={}
+local Set = require(ReplicatedStorage:WaitForChild("Shared").Set)
 map.__index=map
 
 function map.new(rootName)
