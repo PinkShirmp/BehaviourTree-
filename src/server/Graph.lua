@@ -5,6 +5,7 @@ local NodeType = {
     ["Sequence"]="Sequence",
     ["Root"]="Root",
     ["Action"]="Action",
+    ["Decorator"]="Decorator",
 
 }
 local map={}
@@ -21,6 +22,7 @@ function map.new(rootName)
     self["EDGES"]={}
     self["NODETYPE"] = {}
     self["NODETYPE"][rootName]=NodeType["Root"]
+    self["DECORATOR"]={}
     self.RootName =rootName
     return self
 end
@@ -54,8 +56,8 @@ function map:Displayer()
     end
 end
 
-function map:adddecorator()
-    
+function map:adddecorator(node,func)
+    self["DECORATOR"][node]=func
 end
 
 function  map:dfs(node,visited,lastSeq,lastSequenceNode)
@@ -68,6 +70,13 @@ function  map:dfs(node,visited,lastSeq,lastSequenceNode)
     end
     print("visited: "..node)
     if(self["NODETYPE"][node]==NodeType.Sequence) then
+
+        if(self["DECORATOR"][node]~=nil) then
+            if(self["DECORATOR"][node]()==false) then
+                print(node.."FALSE")
+                return
+            end
+        end
         for i ,v  in ipairs(self.EDGES[node]) do
             self:dfs(v,visited,lastSeq,lastSequenceNode)
         end
@@ -89,8 +98,6 @@ function map:Traversal()
     local visited = {}
     self.StopRecursion=false
     self:dfs(self.RootName,visited,{})
-
-
 end
 
 return map
