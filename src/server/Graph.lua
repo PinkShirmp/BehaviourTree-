@@ -77,7 +77,7 @@ function  map:dfs(node,visited,lastSeq,lastSequenceNode)
     end
 
 
-    print("visited: "..node)
+  --  print("visited: "..node)
     if(self["NODETYPE"][node]==NodeType.Sequence) then
 
         if(self["DECORATOR"][node]~=nil) then

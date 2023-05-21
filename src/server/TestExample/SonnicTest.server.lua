@@ -26,7 +26,7 @@ Graph:add("playerisnear","Turnred","Action")
 
 
 --CMD--
-Graph:Displayer()
+--Graph:Displayer()
 
 
 function  checknooneisnear()
@@ -49,8 +49,8 @@ end)
 
 
 
-game:GetService("RunService").Heartbeat:Connect(function(deltaTime)
+--[[game:GetService("RunService").Heartbeat:Connect(function(deltaTime)
     task.wait()
     Graph:Traversal()
-end)
+end)]]
 
