@@ -21,5 +21,5 @@ end
 
 Graph:adddecorator("SEQ",check)
 
-Graph:Displayer()
-Graph:Traversal()
+--Graph:Displayer()
+--Graph:Traversal()
