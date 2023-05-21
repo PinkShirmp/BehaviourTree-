@@ -22,6 +22,7 @@ function map.new(rootName)
     self["EDGES"]={}
     self["NODETYPE"] = {}
     self["NODETYPE"][rootName]=NodeType["Root"]
+    self["ACTION"]={}
     self["DECORATOR"]={}
     self.RootName =rootName
     return self
@@ -68,6 +69,14 @@ function  map:dfs(node,visited,lastSeq,lastSequenceNode)
     if(self["NODETYPE"][node]==NodeType.Sequence) then
         lastSequenceNode=node
     end
+
+    if(self["NODETYPE"][node]==NodeType.Action) then
+        if(self["ACTION"][node]~=nil) then
+            self["ACTION"][node]()
+        end
+    end
+
+
     print("visited: "..node)
     if(self["NODETYPE"][node]==NodeType.Sequence) then
 
@@ -91,6 +100,11 @@ function  map:dfs(node,visited,lastSeq,lastSequenceNode)
     if node == self.RootName and lastSequenceNode ~= nil then
         table.insert(lastSeq, lastSequenceNode)
     end
+end
+
+
+function map:addaction(node,func)
+    self["ACTION"][node]=func
 end
 function map:Traversal()
     --from root travel to nearest selector/squence
